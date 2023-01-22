@@ -1,10 +1,14 @@
-fn unique(a: Vec<i32>) -> Vec<i32> {
-    todo!();
-}
+// fn unique(mut a: Vec<i32>) -> Vec<i32> {
+//     a.sort();
+//     a.dedup();
+//     a
+// }
 
 // advanced 1: use generic types
-// fn unique(a: Vec<T>) -> Vec<T> {
-//     todo!();
+// fn unique<T:Ord>(mut a: Vec<T>) -> Vec<T> {
+//     a.sort();
+//     a.dedup();
+//     a
 // }
 
 // advanced 2: keep items in order
@@ -13,9 +17,9 @@ fn unique(a: Vec<i32>) -> Vec<i32> {
 // }
 
 // advanced 3: use iterators
-// fn unique(a: Iterable<T>) -> Vec<T> {
-//     todo!();
-// }
+fn unique<T>(a: impl Iterator<T>) -> Vec<T> {
+    
+}
 
 fn main() {
     let input = vec![2, 1, 1];
@@ -26,9 +30,9 @@ fn main() {
 
 #[test]
 fn empty_list() {
-    let input = vec![];
+    let input: Vec<i64> = vec![];
     let expected_output = vec![];
-    let actual_output = unique(input);
+    let actual_output:Vec<i64> = unique(input);
     assert_eq!(actual_output, expected_output);
 }
 
