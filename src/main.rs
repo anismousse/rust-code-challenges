@@ -1,6 +1,26 @@
-fn info(a: &T) {
-    todo!();
+// fn info< T:std::fmt::Display>(a: &T) {
+//     println!("{a}")
+// }
+
+// fn info<T:ToString>(a: &T) {
+//     println!("{}", a.to_string())
+// }
+
+use std::ffi::OsStr;
+
+fn info<T: AsRef<OsStr>>(a: &T) {
+    println!("{}", a.as_ref().to_string_lossy())
 }
+
+// trait InfoData{
+//     fn info(&self);
+// }
+
+// impl InfoData for String{
+//     fn info(&self){
+//         print!("{}", self)
+//     }
+// }
 
 fn main() {
     let a = "?";
@@ -9,10 +29,10 @@ fn main() {
     info(&b);
 
     // Advanced 1
-    // use std::ffi::CString;
+    use std::ffi::CString;
     
-    // let c = CString::new("?").unwrap();
-    // info(&input);
+    let c = CString::new("?").unwrap();
+    info(&c);
 
     // Advanced 2
     // use std::path::Path;
