@@ -1,5 +1,5 @@
-fn sort_usernames<T: AsRef<str>>(usernames: &mut Vec<T>) {
-    todo!();
+fn sort_usernames<T: AsRef<str> + std::cmp::Ord>(usernames: &mut Vec<T>) {
+    usernames.sort_by_cached_key(|x| x.as_ref().to_lowercase());
 }
 
 fn main() {
