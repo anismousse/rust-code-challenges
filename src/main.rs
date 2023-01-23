@@ -19,6 +19,7 @@ struct Hand {
 }
 
 impl Hand {
+    
     fn new() -> Self {
         Hand {
             cards: vec![],
@@ -30,8 +31,30 @@ impl Hand {
     }
 
     fn value(&self) -> usize {
-        // TODO: implement this method
-        0 
+        use Card::*;
+        let mut aces_seen = 0;
+        let mut val = 0;
+        for card in &self.cards{
+            val += match card {
+                Ace => {aces_seen +=1; 11},
+                Two => 2,
+                Three => 3,
+                Four => 4,
+                Five => 5,
+                Six => 6,
+                Seven => 7,
+                Eight => 8,
+                Nine => 9,
+                Jack|Queen|King => 10
+            }
+        }
+
+        if aces_seen> 0{
+            if val> 21{
+                val -=10*aces_seen
+            } 
+        };
+        val 
     }
 
     fn is_loosing_hand(&self) -> bool {
@@ -43,6 +66,7 @@ fn main() {
     let mut hand = Hand::new();
     hand.add(Card::King);
     hand.add(Card::Ace);
+    
 }
 
 
@@ -68,8 +92,9 @@ fn risky_hand() {
     hand.add(Card::King);
     hand.add(Card::Queen);
     hand.add(Card::Ace);
+    hand.add(Card::Ace);
     
-    assert_eq!(hand.value(), 21);
+    assert_eq!(hand.value(), 22);
 }
 
 #[test]
